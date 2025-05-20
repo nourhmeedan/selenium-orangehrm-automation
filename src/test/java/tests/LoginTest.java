@@ -1,6 +1,11 @@
+package tests;
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import pages.DashboardPage;
+import pages.LoginPage;
+import pages.LogoutPage;
 
 public class LoginTest {
 
