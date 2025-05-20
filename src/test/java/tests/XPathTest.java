@@ -1,22 +1,30 @@
 package tests;
+
 import org.junit.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pages.LoginPage;
+
+import java.net.URL;
 
 public class XPathTest {
 
     private WebDriver driver;
 
     @Before
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    public void setup() throws Exception {
+        // ✅ Use ChromeOptions and connect to the Selenium Grid container
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+
+        // ✅ Use the Docker network hostname for Selenium Hub (adjust if needed)
+        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
     }
 
     @Test
     public void testTwentyXPaths() {
+        driver.get("https://opensource-demo.orangehrmlive.com/");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("Admin", "admin123");
 

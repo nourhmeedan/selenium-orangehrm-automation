@@ -3,36 +3,33 @@ package tests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class JavaScriptExecutorTest {
+public class WebDriverConfigTest {
+
     private WebDriver driver;
 
     @Before
     public void setup() throws MalformedURLException {
+        // ✅ Advanced WebDriver Configuration
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        options.addArguments("--incognito");
 
-        // Connect to Selenium Grid container
+        // ✅ Dockerized Selenium container connection (use 'selenium' as hostname within the Docker network)
         driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
-
-        driver.get("https://opensource-demo.orangehrmlive.com/");
     }
 
     @Test
-    public void testScrollWithJavaScriptExecutor() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        // Scroll down to the bottom of the page
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-
-        System.out.println("JavaScriptExecutor used to scroll down.");
+    public void testWebDriverConfiguration() {
+        driver.get("https://opensource-demo.orangehrmlive.com/");
+        System.out.println("Title with custom config: " + driver.getTitle());
     }
 
     @After

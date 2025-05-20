@@ -1,33 +1,47 @@
 package tests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.DirectoryPage;
+import org.junit.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.*;
+
 import pages.LoginPage;
+import pages.DirectoryPage;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 
 public class StaticPageTest {
-
     private WebDriver driver;
 
     @Before
-    public void setup() {
-        driver = new ChromeDriver();
+    public void setup() throws MalformedURLException {
+        ChromeOptions options = new ChromeOptions();
+
+        // ✅ Dockerized Selenium container connection
+        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.get("https://opensource-demo.orangehrmlive.com/");
     }
 
     @Test
     public void testStaticDirectoryPage() {
-        driver.get("https://opensource-demo.orangehrmlive.com/");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("Admin", "admin123");
 
-        driver.findElement(By.xpath("//a[@href='/web/index.php/directory/viewDirectory']")).click();
+        // Wait until Directory menu is clickable
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement directoryMenu = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[@href='/web/index.php/directory/viewDirectory']")));
+        directoryMenu.click();
+
         DirectoryPage directoryPage = new DirectoryPage(driver);
 
         String header = directoryPage.getHeaderText();

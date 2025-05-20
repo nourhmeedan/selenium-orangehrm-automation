@@ -1,20 +1,33 @@
 package tests;
+
 import org.junit.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import pages.DashboardPage;
 import pages.LoginPage;
 import pages.LogoutPage;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
 
     private WebDriver driver;
 
     @Before
-    public void setup() {
-        driver = new ChromeDriver();
+    public void setup() throws MalformedURLException {
+        // Use RemoteWebDriver with Dockerized Selenium Grid
+        ChromeOptions options = new ChromeOptions();
+
+        // Connect to Selenium Grid container via Docker network
+        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        // Navigate to OrangeHRM demo site
+        driver.get("https://opensource-demo.orangehrmlive.com/");
     }
 
     @Test
@@ -36,6 +49,8 @@ public class LoginTest {
 
     @After
     public void tearDown() {
-        if (driver != null) driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
