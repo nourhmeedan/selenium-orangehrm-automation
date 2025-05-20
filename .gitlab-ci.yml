@@ -1,0 +1,10 @@
+run_selenium_tests:
+  stage: test
+  image: gradle:8.0.2
+  services:
+    - name: selenium/standalone-chrome:3.141.59
+      alias: selenium
+  variables:
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  script:
+    - gradle test
