@@ -22,6 +22,9 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("Admin", "admin123");
 
+        System.out.println("Page Title: " + loginPage.getPageTitle());
+        Assert.assertTrue(loginPage.getPageTitle().contains("OrangeHRM"));
+
         DashboardPage dashboardPage = new DashboardPage(driver);
         Assert.assertTrue(dashboardPage.isProfileVisible());
 

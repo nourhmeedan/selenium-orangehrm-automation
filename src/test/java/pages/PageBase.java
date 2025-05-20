@@ -19,4 +19,8 @@ public class PageBase {
     public String getBodyText() {
         return waitAndReturnElement(By.tagName("body")).getText();
     }
+
+      public String getPageTitle() {
+        return driver.getTitle();
+    }
 }
