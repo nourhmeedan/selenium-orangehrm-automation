@@ -22,11 +22,11 @@ public class DropdownTest {
 
     @Before
     public void setup() throws Exception {
-        ChromeOptions options = new ChromeOptions();
-        URL remoteUrl = new URL("http://selenium:4444/wd/hub"); // Adjust as needed
-          // 🔍 Add this line to confirm the URL used
-    System.out.println("Connecting to: " + remoteUrl);
-        driver = new RemoteWebDriver(remoteUrl, options);
+       String hostname = System.getenv("GITHUB_ACTIONS") != null ? "localhost" : "selenium";
+       URL remoteUrl = new URL("http://" + hostname + ":4444/wd/hub");
+       System.out.println("Connecting to: " + remoteUrl);
+       driver = new RemoteWebDriver(remoteUrl, options);
+
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 10); // ← FIXED for Selenium 3
     }

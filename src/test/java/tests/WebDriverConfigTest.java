@@ -16,16 +16,15 @@ public class WebDriverConfigTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        // ✅ Advanced WebDriver Configuration
-        ChromeOptions options = new ChromeOptions();
+       String hostname = System.getenv("GITHUB_ACTIONS") != null ? "localhost" : "selenium";
+       URL remoteUrl = new URL("http://" + hostname + ":4444/wd/hub");
+       System.out.println("Connecting to: " + remoteUrl);
+       driver = new RemoteWebDriver(remoteUrl, options);
+
         options.addArguments("--disable-notifications");
         options.addArguments("--incognito");
 
-        URL remoteUrl = new URL("http://selenium:4444/wd/hub");
-          // 🔍 Add this line to confirm the URL used
-    System.out.println("Connecting to: " + remoteUrl);
-
-        driver = new RemoteWebDriver(remoteUrl, options);
+       
         driver.manage().window().maximize();
     }
 

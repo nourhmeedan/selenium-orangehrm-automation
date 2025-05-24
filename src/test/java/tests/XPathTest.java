@@ -14,16 +14,14 @@ public class XPathTest {
 
     @Before
     public void setup() throws Exception {
-        // ✅ Use ChromeOptions and connect to the Selenium Grid container
-        ChromeOptions options = new ChromeOptions();
+        
         options.addArguments("--start-maximized");
 
-        URL remoteUrl = new URL("http://selenium:4444/wd/hub");
-
-          // 🔍 Add this line to confirm the URL used
-    System.out.println("Connecting to: " + remoteUrl);
-
+        String hostname = System.getenv("GITHUB_ACTIONS") != null ? "localhost" : "selenium";
+        URL remoteUrl = new URL("http://" + hostname + ":4444/wd/hub");
+        System.out.println("Connecting to: " + remoteUrl);
         driver = new RemoteWebDriver(remoteUrl, options);
+
     }
 
     @Test
