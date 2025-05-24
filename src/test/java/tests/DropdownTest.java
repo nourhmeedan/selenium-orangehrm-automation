@@ -21,7 +21,7 @@ public class DropdownTest {
     @Before
     public void setup() throws Exception {
         ChromeOptions options = new ChromeOptions();
-        URL remoteUrl = new URL("http://selenium-grid:4444/wd/hub"); // Adjust as needed
+        URL remoteUrl = new URL("http://selenium:4444/wd/hub"); // Adjust as needed
         driver = new RemoteWebDriver(remoteUrl, options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 10); // ← FIXED for Selenium 3

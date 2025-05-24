@@ -21,7 +21,7 @@ public class LoginTest {
         // Use RemoteWebDriver with Dockerized Selenium Grid
         ChromeOptions options = new ChromeOptions();
 
-        URL remoteUrl = new URL("http://selenium-grid:4444/wd/hub");
+        URL remoteUrl = new URL("http://selenium:4444/wd/hub");
         driver = new RemoteWebDriver(remoteUrl, options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

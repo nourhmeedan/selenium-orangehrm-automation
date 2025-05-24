@@ -22,7 +22,7 @@ public class StaticPageTest {
     public void setup() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
 
-        URL remoteUrl = new URL("http://selenium-grid:4444/wd/hub");
+        URL remoteUrl = new URL("http://selenium:4444/wd/hub");
 
 
         driver = new RemoteWebDriver(remoteUrl, options);
