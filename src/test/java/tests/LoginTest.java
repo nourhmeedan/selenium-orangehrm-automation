@@ -19,6 +19,7 @@ public class LoginTest {
     @Before
     public void setup() throws MalformedURLException {
         // Use RemoteWebDriver with Dockerized Selenium Grid
+        ChromeOptions options = new ChromeOptions();
         String hostname = System.getenv("GITHUB_ACTIONS") != null ? "localhost" : "selenium";
         URL remoteUrl = new URL("http://" + hostname + ":4444/wd/hub");
         System.out.println("Connecting to: " + remoteUrl);

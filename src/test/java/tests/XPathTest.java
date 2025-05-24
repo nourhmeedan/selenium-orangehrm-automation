@@ -16,7 +16,7 @@ public class XPathTest {
     public void setup() throws Exception {
         
         
-
+        ChromeOptions options = new ChromeOptions();
         String hostname = System.getenv("GITHUB_ACTIONS") != null ? "localhost" : "selenium";
         URL remoteUrl = new URL("http://" + hostname + ":4444/wd/hub");
         System.out.println("Connecting to: " + remoteUrl);
