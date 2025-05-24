@@ -18,8 +18,10 @@ public class JavaScriptExecutorTest {
     public void setup() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
 
-        // Connect to Selenium Grid container
-        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+        URL remoteUrl = new URL("http://selenium-grid:4444/wd/hub");
+
+
+        driver = new RemoteWebDriver(remoteUrl, options);
         driver.manage().window().maximize();
 
         driver.get("https://opensource-demo.orangehrmlive.com/");

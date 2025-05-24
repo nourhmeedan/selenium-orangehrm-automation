@@ -21,8 +21,10 @@ public class WebDriverConfigTest {
         options.addArguments("--disable-notifications");
         options.addArguments("--incognito");
 
-        // ✅ Dockerized Selenium container connection (use 'selenium' as hostname within the Docker network)
-        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+        URL remoteUrl = new URL("http://selenium-grid:4444/wd/hub");
+
+
+        driver = new RemoteWebDriver(remoteUrl, options);
         driver.manage().window().maximize();
     }
 

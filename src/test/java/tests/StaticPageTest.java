@@ -22,8 +22,10 @@ public class StaticPageTest {
     public void setup() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
 
-        // ✅ Dockerized Selenium container connection
-        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+        URL remoteUrl = new URL("http://selenium-grid:4444/wd/hub");
+
+
+        driver = new RemoteWebDriver(remoteUrl, options);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

@@ -18,8 +18,10 @@ public class XPathTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
 
-        // ✅ Use the Docker network hostname for Selenium Hub (adjust if needed)
-        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+        URL remoteUrl = new URL("http://selenium-grid:4444/wd/hub");
+
+
+        driver = new RemoteWebDriver(remoteUrl, options);
     }
 
     @Test
