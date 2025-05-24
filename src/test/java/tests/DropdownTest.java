@@ -11,6 +11,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
+import org.junit.Ignore;
+
 
 import java.net.URL;
 @Ignore("Dropdown test is temporarily disabled due to unstable behavior")
