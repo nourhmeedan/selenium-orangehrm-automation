@@ -22,6 +22,8 @@ public class LoginTest {
         ChromeOptions options = new ChromeOptions();
 
         URL remoteUrl = new URL("http://selenium:4444/wd/hub");
+          // 🔍 Add this line to confirm the URL used
+    System.out.println("Connecting to: " + remoteUrl);
         driver = new RemoteWebDriver(remoteUrl, options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

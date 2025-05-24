@@ -20,6 +20,9 @@ public class XPathTest {
 
         URL remoteUrl = new URL("http://selenium:4444/wd/hub");
 
+          // 🔍 Add this line to confirm the URL used
+    System.out.println("Connecting to: " + remoteUrl);
+
         driver = new RemoteWebDriver(remoteUrl, options);
     }
 
