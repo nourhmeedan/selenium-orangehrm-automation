@@ -15,7 +15,7 @@ import org.junit.Ignore;
 
 
 import java.net.URL;
-@Ignore("Dropdown test is temporarily disabled due to unstable behavior")
+
 public class DropdownTest {
     private WebDriver driver;
     private WebDriverWait wait;
