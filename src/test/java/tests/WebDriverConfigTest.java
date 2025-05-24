@@ -19,10 +19,11 @@ public class WebDriverConfigTest {
        String hostname = System.getenv("GITHUB_ACTIONS") != null ? "localhost" : "selenium";
        URL remoteUrl = new URL("http://" + hostname + ":4444/wd/hub");
        System.out.println("Connecting to: " + remoteUrl);
+       options.addArguments("--disable-notifications");
+        options.addArguments("--incognito");
        driver = new RemoteWebDriver(remoteUrl, options);
 
-        options.addArguments("--disable-notifications");
-        options.addArguments("--incognito");
+        
 
        
         driver.manage().window().maximize();
